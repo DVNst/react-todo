@@ -1,0 +1,128 @@
+.tasks-list {
+  &__item {
+    position: relative;
+    padding: 10px 12px 10px 32px;
+    height: 37px;
+    width: 100%;
+    margin-bottom: 3px;
+
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      transform: translate( calc(0px - 10px - 100%), -50%);
+
+      vertical-align: middle;
+      border-radius: 50%;
+      background-color: transparent;
+    }
+
+    &--green::before {
+      background-color: #42B883;
+    }
+    &--gray::before {
+      background-color: #C9D1D3;
+    }
+    &--blue::before {
+      background-color: #64C4ED;
+    }
+    &--pink::before {
+      background-color: #FFBBCC;
+    }
+    &--lime::before {
+      background-color: #B6E6BD;
+    }
+    &--purple::before {
+      background-color: #C355F5;
+    }
+    &--black::before {
+      background-color: #09011A;
+    }
+    &--red::before {
+      background-color: #FF6464;
+    }
+    
+
+    &--title, &--addlist {
+      &::before {
+        border-radius: 0;
+      }
+    }
+
+    &--title {
+      &::before {
+        background-color: #7C7C7C;
+        mask-image: url('/img/list.svg');
+        mask-size: cover;
+      }
+    }
+
+    &--addlist {
+      color: #868686;
+      padding-right: 0;
+
+      &::before {
+        background-color: #868686;
+        mask-image: url('/img/add.svg');
+        mask-size: cover;
+      }
+
+      &:hover {
+        color: #000000;
+
+        &::before {
+          background-color: #000000;
+        }
+      }
+    }
+
+    &--active {
+      background-color: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.03);
+      border-radius: 4px;
+    }
+
+    &:hover:not(.tasks-list__item--addlist) {
+      background-color: #ffffff;
+      padding-right: 22px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.03);
+      border-radius: 4px;
+
+      & >.tasks-list__btn-remove {
+        width: 10px;
+        background-color: #E3E3E3;
+      }
+    }
+  }
+
+  &__btn-remove {
+    position: absolute;
+    display: inline-block;
+    right: 0%;
+    top: 50%;
+    transform: translate(-10px, -50%);
+
+    width: 0;
+    height: 10px;
+    border: none;
+    
+
+    font-size: 0;
+    line-height: 16px;
+
+    background-color: transparent;
+    mask-image: url('/img/remove.svg');
+    mask-size: cover;
+  }
+}

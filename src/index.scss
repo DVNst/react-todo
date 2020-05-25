@@ -8,6 +8,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  background-color: #f7f7f7;
+}
+
 .todo {
   position: absolute;
   width: 750px;
@@ -18,7 +22,10 @@
 
   border-radius: 10px;
   border: 1px solid #f1f1f1;
-  box-shadow: 1px 2px 20px #f4f4f4;
+  overflow: hidden;
+
+  box-shadow: 3px 3px 11px #eae9e9;
+  background-color: #ffffff;
 
   &__sidebar {
     width: 200px;
@@ -27,7 +34,7 @@
 
     border-right: 1px solid #f1f1f1;
 
-    background-color: #f4f6f8;
+    background-color: #e3ecf5;
   }
 
   &__tasks {
@@ -35,115 +42,36 @@
   }
 }
 
-.sidebar {
-  &__list {
-    margin-bottom: 20px;
-  }
+.input {
+  padding: 8px 12px;
+  border: 1px solid #EFEFEF;
 
-  &__item {
-    position: relative;
-    padding: 10px 12px 10px 32px;
-    height: 37px;
-    width: 100%;
-    margin-bottom: 3px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
 
+  &::placeholder {
     font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.2px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    line-height: 17px;
+    letter-spacing: 0.15px;
 
-    &::before {
-      content: '';
-      position: absolute;
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      top: 50%;
-      transform: translate( calc(0px - 10px - 100%), -50%);
-
-      vertical-align: middle;
-      border-radius: 50%;
-      background-color: #7C7C7C;
-    }
-
-    &--green::before {
-      background-color: #42B883;
-    }
-    &--gray::before {
-      background-color: #C9D1D3;
-    }
-    &--blue::before {
-      background-color: #64C4ED;
-    }
-    &--pink::before {
-      background-color: #FFBBCC;
-    }
-    &--lightgreen::before {
-      background-color: #B6E6BD;
-    }
-    &--purple::before {
-      background-color: #C355F5;
-    }
-    &--black::before {
-      background-color: #09011A;
-    }
-    &--red::before {
-      background-color: #FF6464;
-    }
-    
-
-    &--title {
-      &::before {
-        width: 13px;
-        height: 16px;
-        transform: translate( calc(0px - 10px - 100%), -53%);
-
-        border-radius: 0;
-
-        background-color: #7C7C7C;
-        mask-image: url('/img/list.svg');
-        mask-size: cover;
-      }
-    }
-
-    &--active {
-      background: #FFFFFF;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.03);
-      border-radius: 4px;
-    }
-
-    &:hover {
-      background: #FFFFFF;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.03);
-      border-radius: 4px;
-      padding-right: 22px;
-
-      & >.sidebar__btn {
-        width: 10px;
-        background-color: #E3E3E3;
-      }
-    }
+    color: #C7C7C7;
   }
 
-  &__btn {
-    position: absolute;
-    display: inline-block;
-    right: 0%;
-    top: 50%;
-    transform: translate(-10px, -50%);
+  :focus {
+    border: 1px solid #110133;
+  }
+}
 
-    width: 0;
-    height: 10px;
-    border: none;
-    
+.btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 4px;
 
-    font-size: 0;
-    line-height: 16px;
+  background-color: #4DD599;
+  color: #ffffff;
+  outline: 1px solid #C9D1D3;
 
-    background-color: transparent;
-    mask-image: url('/img/remove.svg');
-    mask-size: cover;
+  &:hover {
+    background-color: darken(#4DD599, 5%);
   }
 }
