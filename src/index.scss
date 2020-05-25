@@ -69,9 +69,12 @@ body {
 
   background-color: #4DD599;
   color: #ffffff;
-  outline: 1px solid #C9D1D3;
 
   &:hover {
     background-color: darken(#4DD599, 5%);
+  }
+
+  &:active {
+    background-color: darken(#4DD599, 10%);
   }
 }

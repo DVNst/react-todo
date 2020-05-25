@@ -14,10 +14,11 @@ const TasksListAdd = ({ items, isRemovable }) => {
         onClick={() => setPopupClose(!popupClose)}
       />
 
-      <AddPopup
-        isHidden={popupClose}
-        onClick={() => setPopupClose(true)}
-      />
+      {!popupClose &&
+        <AddPopup
+          onClick={() => setPopupClose(true)}
+        />
+      }
     </div>
   );
 };
