@@ -40,9 +40,6 @@
     width: 20px;
     height: 20px;
 
-    font-size: 0;
-    line-height: 0;
-
     border-radius: 50%;
   }
 
@@ -59,8 +56,9 @@
     height: 20px;
     transform: translate(35%, -35%);
 
-    font-size: 0;
-    line-height: 0;
+    &:focus {
+      outline: 1px dotted #525252;
+    }
 
     border-radius: 50%;
     border: none;
@@ -82,10 +80,6 @@
 
   border-radius: 50%;
   border: 2px solid transparent;
-  
-
-  font-size: 0;
-  line-height: 0;
 
   &--grey {
     background-color: #C9D1D3;

@@ -10,6 +10,10 @@ const TasksListAdd = ({ colors, onClickBtnAdd }) => {
   const handlerBtnClosed = () => {
     setPopupClose(true);
   }
+  
+  const handlerClickItem = () => {
+    setPopupClose(!popupClose);
+  }
 
   const handlerBtnAdd = (newListItem) => {
     onClickBtnAdd(newListItem);
@@ -19,8 +23,8 @@ const TasksListAdd = ({ colors, onClickBtnAdd }) => {
   return (
     <div className="tasks-list__add">
       <TasksList
-        items={[{ name: 'Добавить список', type: 'addlist', active: false, }]}
-        onClick={() => setPopupClose(!popupClose)}
+        items={[{ name: 'Добавить список', id: 'addlist' }]}
+        onClickItem={handlerClickItem}
       />
 
       {!popupClose &&

@@ -23,6 +23,10 @@
       & >.tasks-list__btn-remove {
         display: inline-block;
         background-color: #E3E3E3;
+
+        &:hover {
+          background-color: darken(#E3E3E3, 10%);
+        }
       }
     }
 
@@ -119,7 +123,7 @@
 
   &__btn-remove {
     position: absolute;
-    display: inline-block;
+    display: none;
     right: 0%;
     top: 50%;
     transform: translate(-10px, -50%);
@@ -127,9 +131,6 @@
     width: 10px;
     height: 10px;
     border: none;
-
-    font-size: 0;
-    line-height: 16px;
 
     background-color: transparent;
     mask-image: url('/img/remove.svg');

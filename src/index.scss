@@ -14,12 +14,12 @@ body {
 
 .todo {
   position: absolute;
+  display: flex;
   width: 750px;
   height: 530px;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
-
+  transform: translate(-50%, -50%);
   border-radius: 10px;
   border: 1px solid #f1f1f1;
   //overflow: hidden;
@@ -31,9 +31,7 @@ body {
     width: 200px;
     height: 100%;
     padding: 50px 20px;
-
     border-right: 1px solid #f1f1f1;
-
     background-color: #e3ecf5;
   }
 
@@ -44,21 +42,25 @@ body {
 
 .input {
   padding: 8px 12px;
-  border: 1px solid #EFEFEF;
-
+  border: 1px solid #efefef;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   &::placeholder {
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.15px;
-
-    color: #C7C7C7;
+    color: #c7c7c7;
   }
 
   :focus {
     border: 1px solid #110133;
+  }
+
+  &--alert {
+    outline: 1px solid #ff6464;
+    animation: 0.1s tremor ease-out;
+    animation-iteration-count: 3;
   }
 }
 
@@ -66,15 +68,36 @@ body {
   padding: 10px 12px;
   border: none;
   border-radius: 4px;
-
-  background-color: #4DD599;
+  background-color: #4dd599;
   color: #ffffff;
 
   &:hover {
-    background-color: darken(#4DD599, 5%);
+    background-color: darken(#4dd599, 5%);
   }
 
   &:active {
-    background-color: darken(#4DD599, 10%);
+    background-color: darken(#4dd599, 10%);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+@keyframes tremor {
+  0%,
+  25% {
+    left: -1px;
+    transform: translaSteX(-2%);
+  }
+
+  50%,
+  100% {
+    left: 1px;
+    transform: translateX(2%);
   }
 }
