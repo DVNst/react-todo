@@ -1,28 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // import './tasks-list-add.scss';
 
-const AddPopup = ({ onClick }) => {
+const AddPopup = ({ colors, onClickBtnClosed, onClickBtnAdd }) => {
+  const [selectedColor, setSelectedColor] = useState(colors[0].id);
+  const [listName, setListName] = useState("");
+
+  const handlerBtnAdd = () => {
+    const newListItem = {
+      "name": listName,
+      "colorId": selectedColor,
+      "color" : colors.find(color => color.id === selectedColor).name
+    }
+    onClickBtnAdd(newListItem);
+  }
+
+  const handlerInputChange = (evt) => {
+    setListName(evt.target.value);
+  }
+
   return (
     <div className="tasks-list__add-popup add-popup">
 
-      <input type="text"
+      <input
+        type="text"
         className="add-popup__input input"
         placeholder="Добавить список"
-        autoFocus={true}/>
+        autoFocus={true}
+        onChange={(evt) => handlerInputChange(evt)}
+      />
 
       <ul className="add-popup__pins">
-        <li className="add-popup__pin"><button className="pin pin--active pin--grey">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--green">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--blue">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--pink">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--lime">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--purple">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--black">color</button></li>
-        <li className="add-popup__pin"><button className="pin pin--red">color</button></li>
+        {colors.map((color, i) => (
+          <li className="add-popup__pin" key={color.id}>
+            <button
+              className={
+                "pin pin--" + color.name +
+                ((color.id === selectedColor) ? " pin--active" : "")
+              }
+              onClick={() => setSelectedColor(color.id)}
+            >
+              {color.name}
+            </button>
+          </li>
+        ))}
       </ul>
-      <button className="add-popup__btn-add btn">Добавить</button>
-      <button className="add-popup__btn-closed" onClick={onClick}>Закрыть</button>
+      <button className="add-popup__btn-add btn" onClick={handlerBtnAdd}>Добавить</button>
+      <button className="add-popup__btn-closed" onClick={onClickBtnClosed}>Закрыть</button>
     </div>
   );
 };

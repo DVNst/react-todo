@@ -13,7 +13,7 @@ const TasksItem = ({ item, isRemovable, onClick }) => {
       }
       onClick={onClick}
     >
-      {item.value}
+      {item.name}
       {isRemovable && <button className="tasks-list__btn-remove">удалить</button>}
     </li>
   );

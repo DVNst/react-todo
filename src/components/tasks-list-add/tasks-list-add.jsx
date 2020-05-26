@@ -4,19 +4,30 @@ import TasksList from '../tasks-list/tasks-list';
 import './tasks-list-add.scss';
 import AddPopup from '../add-popup/add-popup';
 
-const TasksListAdd = ({ items, isRemovable }) => {
+const TasksListAdd = ({ colors, onClickBtnAdd }) => {
   const [popupClose, setPopupClose] = useState(true);
+
+  const handlerBtnClosed = () => {
+    setPopupClose(true);
+  }
+
+  const handlerBtnAdd = (newListItem) => {
+    onClickBtnAdd(newListItem);
+    setPopupClose(true);
+  }
 
   return (
     <div className="tasks-list__add">
       <TasksList
-        items={[{ value: 'Добавить список', type: 'addlist', active: false, }]}
+        items={[{ name: 'Добавить список', type: 'addlist', active: false, }]}
         onClick={() => setPopupClose(!popupClose)}
       />
 
       {!popupClose &&
         <AddPopup
-          onClick={() => setPopupClose(true)}
+          colors = {colors}
+          onClickBtnClosed={handlerBtnClosed}
+          onClickBtnAdd={handlerBtnAdd}
         />
       }
     </div>
