@@ -1,0 +1,15 @@
+.tasks {
+  padding: 56px;
+
+  &__title {
+    width: 100%;
+
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+
+    color: #64c4ed;
+  }
+}

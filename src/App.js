@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TasksList from './components/tasks-list/tasks-list';
 import TasksListAdd from './components/tasks-list-add/tasks-list-add';
+import Tasks from './components/tasks/tasks';
 
 import DB from './assets/db.json';
 
@@ -56,42 +57,7 @@ function App() {
         </div>
 
         <div className="todo__tasks tasks">
-          <div className="tasks__title">
-            <h2 className="tasks__name">Фронтенд</h2>
-            <button className="tasks__rename"><span className="visually-hidden">Редактировать</span></button>
-          </div>
-
-          <ul className="tasks__list">
-            <li className="tasks__item">
-              <label>
-                <input type="checkbox" />
-              Изучить JavaScript
-              <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-              </label>
-            </li>
-            <li className="tasks__item">
-              <label>
-                <input type="checkbox" />
-              Изучить паттерны проектирования
-              <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-              </label>
-            </li>
-            <li className="tasks__item">
-              <label>
-                <input type="checkbox" checked />
-              ReactJS Hooks (useState, useReducer, useEffect и т.д.)
-              <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-              </label>
-            </li>
-            <li className="tasks__item">
-              <label>
-                <input type="checkbox" checked disabled />
-              Redux (redux-observable, redux-saga)
-              <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-              </label>
-            </li>
-          </ul>
-          <button className="tasks__btn-add">Новая задача</button>
+          <Tasks />
         </div>
       </div>
     </>
