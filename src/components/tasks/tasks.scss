@@ -8,6 +8,12 @@
     border-bottom: 1px solid #f2f2f2;
 
     align-items: center;
+
+    &:hover {
+      & .tasks__rename {
+        display: inline-block;
+      }
+    }
   }
 
   &__name {
@@ -21,11 +27,7 @@
 
     color: #64c4ed;
 
-    &:hover {
-      & + .tasks__rename {
-        display: inline-block;
-      }
-    }
+    
   }
 
   &__rename {
@@ -37,6 +39,14 @@
     background-color: #dfdfdf;
     mask-image: url("/img/edit.svg");
     mask-size: cover;
+
+    &:hover{
+      background-color: darken(#dfdfdf, 10%);
+    }
+
+    &:active {
+      background-color: #000000;
+    }
   }
 
   &__list {
@@ -156,7 +166,7 @@
   &__btn-add {
     position: relative;
     width: 100%;
-    margin-left: 35px;
+    padding: 10px 12px 10px 35px;
     border: none;
 
     font-family: "Lato", sans-serif;
@@ -177,7 +187,8 @@
       width: 16px;
       height: 16px;
       top: 0;
-      left: -32px;
+      left: 2px;
+      transform: translateY(50%);
       box-sizing: border-box;
 
       background-color: #b4b4b4;
