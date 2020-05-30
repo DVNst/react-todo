@@ -14,7 +14,7 @@ const TasksItem = ({ item, itemsActive, isRemovable, onClickItem, onClickRemoveI
       className={
         "tasks-list__item" +
         (typeof(item.id) === 'string' ? " tasks-list__item--" + item.id : "") +
-        (item.color ? " tasks-list__item--" + item.color : "") +
+        (item.color ? " tasks-list__item--" + item.color.name : "") +
         (itemsActive === item.id ? " tasks-list__item--active" : "")
       }
       tabIndex={1}

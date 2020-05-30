@@ -1,30 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import TasksList from './components/tasks-list/tasks-list';
 import TasksListAdd from './components/tasks-list-add/tasks-list-add';
 import Tasks from './components/tasks/tasks';
 
-import DB from './assets/db.json';
+// import DB from './assets/db.json';
 
 function App() {
-  const colors = DB.colors;
-
-  let initialStateItems = DB.lists.map(item => ({ ...item, "color": colors.find(color => color.id === item.colorId).name }));
-  const [items, setItems] = useState(initialStateItems);
-
+  const [colors, setColors] = useState([]);
+  const [items, setItems] = useState([]);
   const [itemsActive, setItemsActive] = useState('title');
 
-  let ids = items.map(item => item.id);
-  let itemsEndId = ids.length > 0 ? Math.max(...ids) : 0;
+  useEffect(() => {
+    axios.get('http://localhost:3001/lists/?_expand=color').then(({ data }) => {
+      setItems(data);
+    });
+
+    axios.get('http://localhost:3001/colors/').then(({ data }) => {
+      setColors(data);
+    });
+  }, []);
 
   const handlerBtnAdd = (newListItem) => {
-    newListItem.id = itemsEndId + 1;
     setItems([...items, newListItem]);
   }
 
   const handlerClickRemoveItem = (itemID) => {
     if (itemsActive === itemID) setItemsActive('title');
 
-    setItems(items.filter((item) => item.id !== itemID));
+    axios
+      .delete('http://localhost:3001/lists/' + itemID)
+      .then(() => {
+        setItems(items.filter((item) => item.id !== itemID));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const handlerClickItem = (itemID) => {

@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 
 // import './tasks-list-add.scss';
 
 const AddPopup = ({ colors, onClickBtnClosed, onClickBtnAdd }) => {
   const [selectedColor, setSelectedColor] = useState(colors[0].id);
   const [listName, setListName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const popupInput = useRef(null);
 
@@ -17,12 +19,24 @@ const AddPopup = ({ colors, onClickBtnClosed, onClickBtnAdd }) => {
       return;
     }
 
-    const newListItem = {
-      "name": listName,
-      "colorId": selectedColor,
-      "color": colors.find(color => color.id === selectedColor).name
-    }
-    onClickBtnAdd(newListItem);
+    setIsLoading(true);
+
+    axios
+      .post('http://localhost:3001/lists', { "name": listName, "colorId": selectedColor, })
+      .then(({ data }) => {
+        const newListItem = {
+          ...data,
+          "name": listName,
+          "colorId": selectedColor,
+          "color": colors.find(color => color.id === selectedColor)
+        };
+        onClickBtnAdd(newListItem);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 
   const handlerInputChange = (evt) => {
@@ -56,10 +70,12 @@ const AddPopup = ({ colors, onClickBtnClosed, onClickBtnAdd }) => {
           </li>
         ))}
       </ul>
-      <button className="add-popup__btn-add btn" onClick={handlerBtnAdd}>Добавить</button>
+      <button className="add-popup__btn-add btn" onClick={handlerBtnAdd}>
+        {isLoading ? 'Добавление...' : 'Добавить'}
+      </button>
       <button className="add-popup__btn-closed" onClick={onClickBtnClosed}>
         <span className="visually-hidden">Закрыть</span>
-        </button>
+      </button>
     </div>
   );
 };
