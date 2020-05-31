@@ -15,8 +15,7 @@ const TasksList = ({ items, itemsActive, isRemovable, onClickItem, onClickRemove
           onClickItem = {onClickItem}
           onClickRemoveItem = {onClickRemoveItem}
         />
-      ))
-      }
+      ))}
     </ul>
   );
 };

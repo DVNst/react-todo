@@ -1,44 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
+import Task from '../task/task';
 import './tasks.scss';
 
 const Tasks = () => {
+  const [todo, setTodo] = useState({ "tasks": [] });
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/lists/?id=2&_embed=tasks').then(({ data }) => {
+      setTodo(data[0]);
+    });
+  }, []);
+
   return (
     <>
       <div className="tasks__title">
-        <h2 className="tasks__name">Фронтенд</h2>
+        <h2 className="tasks__name">{todo.name}</h2>
         <button className="tasks__rename"><span className="visually-hidden">Редактировать</span></button>
       </div>
 
       <ul className="tasks__list">
-        <li className="tasks__item">
-          <input id="check1" type="checkbox" className="tasks__checkbox" />
-          <label htmlFor="check1" className="tasks__item-name" >
-            Изучить JavaScript
-          </label>
-          <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-        </li>
-        <li className="tasks__item">
-          <input id="check2" type="checkbox" className="tasks__checkbox" />
-          <label htmlFor="check2" className="tasks__item-name" >
-            Изучить паттерны проектирования
-          </label>
-          <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-        </li>
-        <li className="tasks__item">
-          <input id="check3" type="checkbox" className="tasks__checkbox" checked />
-          <label htmlFor="check3" className="tasks__item-name" >
-            ReactJS Hooks (useState, useReducer, useEffect и т.д.)
-          </label>
-          <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-        </li>
-        <li className="tasks__item">
-          <input id="check4" type="checkbox" className="tasks__checkbox" checked disabled />
-          <label htmlFor="check4" className="tasks__item-name" >
-            Redux (redux-observable, redux-saga)
-          </label>
-          <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-        </li>
+        {todo.tasks.map((task, i) => (
+          <Task
+            task={task}
+            key={"task-" + task.id}
+          />
+        ))}
       </ul>
       <button className="tasks__btn-add">Новая задача</button>
     </>
