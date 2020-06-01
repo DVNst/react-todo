@@ -8,13 +8,16 @@ import Tasks from './components/tasks/tasks';
 // import DB from './assets/db.json';
 
 function App() {
-  const [colors, setColors] = useState([]);
-  const [items, setItems] = useState([]);
-  const [itemsActive, setItemsActive] = useState('title');
+  const [colors, setColors] = useState(null);
+  const [items, setItems] = useState(null);
+  const [itemsActive, setItemsActive] = useState(null);
+  const [itemIdActive, setItemIdActive] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/lists/?_expand=color').then(({ data }) => {
+    axios.get('http://localhost:3001/lists/?_expand=color&_embed=tasks').then(({ data }) => {
       setItems(data);
+      setItemsActive(data);
+      setItemIdActive("title");
     });
 
     axios.get('http://localhost:3001/colors/').then(({ data }) => {
@@ -24,10 +27,15 @@ function App() {
 
   const handlerBtnAdd = (newListItem) => {
     setItems([...items, newListItem]);
+
+    if (itemIdActive === "title") {
+      setItemsActive(items);
+    };
+
   }
 
   const handlerClickRemoveItem = (itemID) => {
-    if (itemsActive === itemID) setItemsActive('title');
+    if (itemIdActive === itemID) setItemIdActive("title");
 
     axios
       .delete('http://localhost:3001/lists/' + itemID)
@@ -37,10 +45,20 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
+
+    if (itemIdActive === "title") {
+      setItemsActive(items);
+    };
   }
 
-  const handlerClickItem = (itemID) => {
-    setItemsActive(itemID);
+  const handlerClickItem = (item) => {
+    setItemsActive([item]);
+    setItemIdActive(item.id);
+  }
+
+  const handlerClickItemAll = (item) => {
+    setItemsActive(items);
+    setItemIdActive("title");
   }
 
   return (
@@ -48,28 +66,32 @@ function App() {
       <h1 className="todo__title visually-hidden">To-do</h1>
       <div className="todo">
         <div className="todo__sidebar task-list">
-          <TasksList
-            items={[{ name: 'Все задачи', id: 'title' }]}
-            itemsActive={itemsActive}
-            onClickItem={handlerClickItem}
-          />
+          {itemsActive &&
+            <TasksList
+              items={[{ name: 'Все задачи', id: 'title' }]}
+              itemIdActive={itemIdActive}
+              onClickItem={handlerClickItemAll}
+            />
+          }
 
-          <TasksList
-            items={items}
-            itemsActive={itemsActive}
-            isRemovable={true}
-            onClickRemoveItem={handlerClickRemoveItem}
-            onClickItem={handlerClickItem}
-          />
+          {items &&
+            <TasksList
+              items={items}
+              itemIdActive={itemIdActive}
+              isRemovable={true}
+              onClickRemoveItem={handlerClickRemoveItem}
+              onClickItem={handlerClickItem}
+            />
+          }
 
-          <TasksListAdd
+          {colors && <TasksListAdd
             colors={colors}
             onClickBtnAdd={handlerBtnAdd}
-          />
+          />}
         </div>
 
         <div className="todo__tasks tasks">
-          <Tasks />
+          {(setItemsActive) && <Tasks itemsActive={itemsActive} />}
         </div>
       </div>
     </>

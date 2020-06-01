@@ -2,7 +2,7 @@ import React from 'react';
 
 import './tasks-item.scss'
 
-const TasksItem = ({ item, itemsActive, isRemovable, onClickItem, onClickRemoveItem }) => {
+const TasksItem = ({ item, itemIdActive, isRemovable, onClickItem, onClickRemoveItem }) => {
 
   const handlerClickRemoveItem = (evt) => {
     evt.stopPropagation();
@@ -13,14 +13,18 @@ const TasksItem = ({ item, itemsActive, isRemovable, onClickItem, onClickRemoveI
     <li
       className={
         "tasks-list__item" +
-        (typeof(item.id) === 'string' ? " tasks-list__item--" + item.id : "") +
+        (typeof (item.id) === 'string' ? " tasks-list__item--" + item.id : "") +
         (item.color ? " tasks-list__item--" + item.color.name : "") +
-        (itemsActive === item.id ? " tasks-list__item--active" : "")
+        (itemIdActive === item.id ? " tasks-list__item--active" : "")
       }
       tabIndex={1}
-      onClick={() => onClickItem(item.id)}
+      onClick={() => onClickItem(item)}
     >
       {item.name}
+      {item.tasks ?
+        <span className="tasks-list__count">{` (${item.tasks.length})`}</span>
+        : null
+      }
 
       {isRemovable &&
         <button
@@ -31,7 +35,7 @@ const TasksItem = ({ item, itemsActive, isRemovable, onClickItem, onClickRemoveI
           <span className="visually-hidden">Удалить</span>
         </button>
       }
-    </li>
+    </li >
   );
 };
 

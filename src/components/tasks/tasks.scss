@@ -1,10 +1,27 @@
 .tasks {
   padding: 56px;
+  position: relative;
+
+  &__empty {
+    position: absolute;
+    margin-right: -50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+
+    color: #c9d1d3;
+  }
 
   &__title {
     display: flex;
     width: 100%;
     padding-bottom: 20px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #f2f2f2;
 
     align-items: center;
@@ -26,8 +43,6 @@
     line-height: 32px;
 
     color: #64c4ed;
-
-    
   }
 
   &__rename {
@@ -40,13 +55,17 @@
     mask-image: url("/img/edit.svg");
     mask-size: cover;
 
-    &:hover{
+    &:hover {
       background-color: darken(#dfdfdf, 10%);
     }
 
     &:active {
       background-color: #000000;
     }
+  }
+
+  &__list {
+    margin: 30px 0;
   }
 
   &__btn-add {

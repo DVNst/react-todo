@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import TaskTodo from '../task-todo/task-todo';
 import './task.scss';
 
 const Task = ({ task }) => {
-  const [checked, setChecked] = useState(task.completed);
-
-  const handleChange = () => {
-    setChecked(!checked);
-  }
-
   return (
-    <li className="tasks__item">
-      <input
-        className="tasks__checkbox"
-        id={"task-" + task.id}
-        type="checkbox"
-        checked={checked}
-        disabled={task.disabled}
-        onChange={handleChange}
-      />
-      <label htmlFor={"task-" + task.id} className="tasks__item-name" >
-        {task.text}
-      </label>
-      <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
-    </li>
+    <>
+      <div className="tasks__title">
+        <h2 className="tasks__name">{task.name}</h2>
+        <button className="tasks__rename"><span className="visually-hidden">Редактировать</span></button>
+      </div>
+
+      {task.tasks && task.tasks.length > 0 &&
+        <ul className="tasks__list">
+          {task.tasks.map((task, i) => (
+            <TaskTodo
+              task={task}
+              key={"task-" + task.id}
+            />
+          ))}
+        </ul>
+      }
+
+      <button className="tasks__btn-add">Новая задача</button>
+    </>
   )
 };
 

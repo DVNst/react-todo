@@ -13,13 +13,14 @@ body {
 }
 
 .todo {
-  position: absolute;
+  // position: absolute;
   display: flex;
+  margin: 0 auto;
   width: 750px;
   min-height: 530px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  // left: 50%;
+  // top: 50%;
+  // transform: translate(-50%, -50%);
   border-radius: 10px;
   border: 1px solid #f1f1f1;
   //overflow: hidden;
