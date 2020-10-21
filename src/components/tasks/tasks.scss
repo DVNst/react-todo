@@ -5,7 +5,7 @@
   &__empty {
     position: absolute;
     margin-right: -50%;
-    top: 50%;
+    top: 250px;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -43,6 +43,31 @@
     line-height: 32px;
 
     color: #64c4ed;
+
+    &--green {
+      color: #42B883;
+    }
+    &--grey {
+      color: #C9D1D3;
+    }
+    &--blue {
+      color: #64C4ED;
+    }
+    &--pink {
+      color: #FFBBCC;
+    }
+    &--lime {
+      color: #B6E6BD;
+    }
+    &--purple {
+      color: #C355F5;
+    }
+    &--black {
+      color: #09011A;
+    }
+    &--red {
+      color: #FF6464;
+    }
   }
 
   &__rename {
@@ -68,7 +93,13 @@
     margin: 30px 0;
   }
 
-  &__btn-add {
+  &__new-task {
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__btn-new {
     position: relative;
     width: 100%;
     padding: 10px 12px 10px 35px;

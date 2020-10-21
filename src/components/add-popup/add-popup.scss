@@ -1,0 +1,55 @@
+.add-popup {
+  padding: 18px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  &__input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  &__pins {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__pin {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+  }
+
+  &__btn-add {
+    width: 100%;
+  }
+
+  &__btn-closed {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    transform: translate(35%, -35%);
+
+    &:focus {
+      outline: 1px dotted #525252;
+    }
+
+    border-radius: 50%;
+    border: none;
+    background-color: #C9D1D3;
+    background-image: url("../../assets/img/close.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  &--hidden {
+    display: none;
+  }
+}

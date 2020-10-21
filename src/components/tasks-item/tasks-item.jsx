@@ -21,9 +21,8 @@ const TasksItem = ({ item, itemIdActive, isRemovable, onClickItem, onClickRemove
       onClick={() => onClickItem(item)}
     >
       {item.name}
-      {item.tasks ?
+      {item.tasks && item.tasks.length > 0 &&
         <span className="tasks-list__count">{` (${item.tasks.length})`}</span>
-        : null
       }
 
       {isRemovable &&

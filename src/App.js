@@ -11,13 +11,13 @@ function App() {
   const [colors, setColors] = useState(null);
   const [items, setItems] = useState(null);
   const [itemsActive, setItemsActive] = useState(null);
-  const [itemIdActive, setItemIdActive] = useState(null);
+  const [itemIdActive, setitemIdActive] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:3001/lists/?_expand=color&_embed=tasks').then(({ data }) => {
       setItems(data);
       setItemsActive(data);
-      setItemIdActive("title");
+      setitemIdActive("title");
     });
 
     axios.get('http://localhost:3001/colors/').then(({ data }) => {
@@ -31,34 +31,54 @@ function App() {
     if (itemIdActive === "title") {
       setItemsActive(items);
     };
-
   }
 
-  const handlerClickRemoveItem = (itemID) => {
-    if (itemIdActive === itemID) setItemIdActive("title");
+  const handlerBtnAddTodo = (newTodo) => {
+    const newList = items.map((item) => {
+      if (item.id === newTodo.listId) {
+        item.tasks = [...item.tasks, newTodo]
+      }
 
+      return item;
+    });
+
+    setItems(newList);
+  }
+
+  const handlerClickRemoveItem = (itemId) => {
     axios
-      .delete('http://localhost:3001/lists/' + itemID)
+      .delete('http://localhost:3001/lists/' + itemId)
       .then(() => {
-        setItems(items.filter((item) => item.id !== itemID));
+        setItems(items.filter((item) => item.id !== itemId));
       })
       .catch((error) => {
         console.log(error);
       });
 
-    if (itemIdActive === "title") {
-      setItemsActive(items);
+    if (itemIdActive === itemId) {
+      handlerClickItemAll();
     };
+  }
+
+  const handlerRemoveTodo = (todo) => {
+    const newList = items.map((item) => {
+      if (item.id === todo.listId) {
+        item.tasks = item.tasks.filter((task) => task.id !== todo.id);
+      }
+      return item;
+    });
+
+    setItems(newList);
   }
 
   const handlerClickItem = (item) => {
     setItemsActive([item]);
-    setItemIdActive(item.id);
+    setitemIdActive(item.id);
   }
 
-  const handlerClickItemAll = (item) => {
+  const handlerClickItemAll = () => {
     setItemsActive(items);
-    setItemIdActive("title");
+    setitemIdActive("title");
   }
 
   return (
@@ -84,14 +104,21 @@ function App() {
             />
           }
 
-          {colors && <TasksListAdd
-            colors={colors}
-            onClickBtnAdd={handlerBtnAdd}
-          />}
+          {colors &&
+            <TasksListAdd
+              colors={colors}
+              onClickBtnAdd={handlerBtnAdd}
+            />
+          }
         </div>
 
         <div className="todo__tasks tasks">
-          {(setItemsActive) && <Tasks itemsActive={itemsActive} />}
+          {(setItemsActive) &&
+            <Tasks
+              itemsActive={itemsActive}
+              onClickBtnAddTodo={handlerBtnAddTodo}
+              onClickRemoveTodo={handlerRemoveTodo}
+            />}
         </div>
       </div>
     </>

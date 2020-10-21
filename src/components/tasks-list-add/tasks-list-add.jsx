@@ -28,11 +28,13 @@ const TasksListAdd = ({ colors, onClickBtnAdd }) => {
       />
 
       {!popupClose &&
-        <AddPopup
-          colors = {colors}
-          onClickBtnClosed={handlerBtnClosed}
-          onClickBtnAdd={handlerBtnAdd}
-        />
+        <div className="tasks-list__add-popup add-popup">
+          <AddPopup
+            colors = {colors}
+            onClickBtnClosed={handlerBtnClosed}
+            onClickBtnAdd={handlerBtnAdd}
+          />
+        </div>
       }
     </div>
   );

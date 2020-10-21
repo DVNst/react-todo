@@ -3,8 +3,7 @@ import React from 'react';
 import Task from '../task/task';
 import './tasks.scss';
 
-const Tasks = ({ itemsActive }) => {
-  
+const Tasks = ({ itemsActive, onClickBtnAddTodo, onClickRemoveTodo }) => {
   return (
     <>
       {(!itemsActive) &&
@@ -15,6 +14,9 @@ const Tasks = ({ itemsActive }) => {
         itemsActive.map((item) => (
           < Task
             task={item}
+            withEmpty={itemsActive.length === 1}
+            onClickBtnAddTodo={onClickBtnAddTodo}
+            onClickRemoveTodo={onClickRemoveTodo}
             key={`tasks-title-${item.id}`}
           />
         ))

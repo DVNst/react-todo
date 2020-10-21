@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 16px;
+    line-height: 20px;
     vertical-align: middle;
 
     &:hover {
@@ -71,6 +71,8 @@
     position: relative;
     display: inline-block;
     margin-left: 35px;
+    font-size: 16px;
+    line-height: 20px;
 
     &::before {
       content: "";
@@ -118,7 +120,7 @@
       height: 10px;
       right: 0;
       top: 0;
-      transform: translateY(50%);
+      transform: translate(-50%, 50%);
       background-color: #e3e3e3;
       mask-image: url("/img/remove.svg");
       mask-size: cover;

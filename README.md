@@ -4,8 +4,16 @@ Archakov Blog ([youtube](https://www.youtube.com/playlist?list=PL0FGkDGJQjJGBcY_
 ```
 npm install
 npm install -g json-server
-npm run json-server
+```
+```
 npm start
+```
+or
+```
+npm run json-server
+npm run react
+```
+
 ```
 [http://localhost:3000](http://localhost:3000)
 

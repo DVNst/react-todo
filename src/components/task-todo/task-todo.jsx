@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import './task-todo.scss';
 
-const TaskTodo = ({ task }) => {
+const TaskTodo = ({ task, onClickRemoveTodo }) => {
   const [checked, setChecked] = useState(task.completed);
 
-  const handleChange = () => {
+  const handlerChange = () => {
     setChecked(!checked);
+  }
+
+  const handlerRemoveTodo = () => {
+    axios
+    .delete('http://localhost:3001/tasks/' + task.id)
+    .then(() => {
+      onClickRemoveTodo(task);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   return (
@@ -17,12 +29,12 @@ const TaskTodo = ({ task }) => {
         type="checkbox"
         checked={checked}
         disabled={task.disabled}
-        onChange={handleChange}
+        onChange={handlerChange}
       />
       <label htmlFor={"task-" + task.id} className="tasks__item-name" >
         {task.text}
       </label>
-      <button className="tasks__btn-remove"><span className="visually-hidden">Удалить</span></button>
+      <button className="tasks__btn-remove" onClick={handlerRemoveTodo}><span className="visually-hidden">Удалить</span></button>
     </li>
   )
 };

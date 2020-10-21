@@ -3,6 +3,9 @@
   padding: 0;
   list-style: none;
   box-sizing: border-box;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.15px;
   font-family: 'Roboto', -apple-system, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -78,6 +81,19 @@ body {
 
   &:active {
     background-color: darken(#4dd599, 10%);
+  }
+
+  &--gray {
+    background-color: #f4f6f8;
+    color: #9c9c9c;
+
+    &:hover {
+      background-color: darken(#f4f6f8, 5%);
+    }
+
+    &:active {
+      background-color: darken(#f4f6f8, 10%);
+    }
   }
 }
 
