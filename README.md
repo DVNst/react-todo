@@ -14,7 +14,6 @@ npm run json-server
 npm run react
 ```
 
-```
 [http://localhost:3000](http://localhost:3000)
 
 ```
